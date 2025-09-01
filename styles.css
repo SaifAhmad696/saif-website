@@ -1,0 +1,486 @@
+/* ======================================================================
+   styles.css — MSA Tech Store
+   Theme: Purple + Gray family (includes #333333 & #555555)
+   Save as styles.css and place with index.html
+   ====================================================================== */
+
+/* -------------------------
+   Root variables
+   ------------------------- */
+:root{
+  /* grays */
+  --gray-900: #0f0f0f;
+  --gray-800: #191919;
+  --gray-700: #333333; /* user-specified */
+  --gray-600: #444444;
+  --gray-500: #555555; /* user-specified */
+  --gray-400: #7a7a7a;
+  --gray-300: #9ea3a8;
+
+  /* purples (accents) */
+  --purple-900: #120017;
+  --purple-800: #2B0033;
+  --purple-700: #4b1a6a;
+  --purple-600: #7a4ff0;
+  --purple-500: #9b72ff;
+
+  /* neutrals */
+  --white: #ffffff;
+  --muted: rgba(255,255,255,0.82);
+
+  /* spacing & radii */
+  --gap-xs: 8px;
+  --gap-sm: 12px;
+  --gap-md: 20px;
+  --gap-lg: 32px;
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 20px;
+
+  /* layout */
+  --container: 1200px;
+
+  --ease: cubic-bezier(.18,.9,.32,1);
+}
+
+/* -------------------------
+   Base reset & body
+   ------------------------- */
+*{ box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html,body{ height:100%; }
+body{
+  margin:0;
+  font-family: "Inter", "Cairo", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color:var(--muted);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  background:
+    linear-gradient(180deg, rgba(18,0,23,0.55), rgba(18,0,23,0.35)),
+    linear-gradient(180deg, var(--gray-700), var(--purple-800) 60%);
+  background-blend-mode: overlay;
+  line-height:1.45;
+  overflow-y: auto;
+}
+
+/* container */
+.container{
+  width:min(var(--container), calc(100% - 48px));
+  margin:0 auto;
+  padding:0 24px;
+}
+
+/* links */
+a{ color:inherit; text-decoration:none; }
+.muted{ color: rgba(255,255,255,0.72); }
+
+/* -------------------------
+   Topbar / header
+   ------------------------- */
+.header-wrap{
+  position: sticky;
+  top: 0;
+  z-index: 1200;
+  background: linear-gradient(180deg, rgba(10,6,10,0.55), rgba(10,6,10,0.08));
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  backdrop-filter: blur(6px);
+}
+.header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: var(--gap-sm);
+  padding: 14px 0;
+}
+.brand{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+.logo-mark{
+  width:56px; height:56px; border-radius:12px;
+  display:grid; place-items:center; font-weight:900; color:var(--white);
+  background: linear-gradient(90deg, var(--purple-700), var(--purple-600));
+  box-shadow: 0 12px 36px rgba(122,79,240,0.14);
+}
+.title{ font-weight:900; font-size:16px; color:var(--white) }
+.subtitle{ font-size:12px; color:var(--gray-300) }
+
+/* nav */
+.nav ul{ list-style:none; display:flex; gap:8px; margin:0; padding:0; align-items:center; }
+.nav a{
+  padding:8px 12px; border-radius:8px; display:inline-block; color:var(--gray-300); font-weight:700;
+  transition: all 160ms var(--ease);
+}
+.nav a:hover{ color:var(--white); background: rgba(255,255,255,0.02) }
+
+/* header actions */
+.header-actions{ display:flex; gap:8px; align-items:center; }
+.btn{
+  display:inline-flex; align-items:center; gap:8px;
+  border:0; padding:10px 14px; border-radius:10px; font-weight:800; cursor:pointer;
+  transition: transform 120ms var(--ease), box-shadow 180ms var(--ease);
+}
+.btn:active{ transform: translateY(1px) }
+.btn-primary{
+  background: linear-gradient(90deg, var(--purple-600), var(--purple-500));
+  color:var(--white);
+  box-shadow: 0 12px 36px rgba(122,79,240,0.14);
+}
+.btn-ghost{
+  background:transparent;
+  color:var(--gray-300);
+  border:1px solid rgba(255,255,255,0.04);
+}
+
+/* -------------------------
+   Hero
+   ------------------------- */
+.hero{
+  padding: 64px 0 40px 0;
+}
+.hero-inner{
+  display:grid;
+  grid-template-columns: 1fr 480px;
+  gap: var(--gap-lg);
+  align-items:center;
+}
+
+/* left */
+.hero-left .hero-title, .hero-title{
+  font-size:42px; font-weight:900; color:var(--white); margin:0 0 12px 0; line-height:1.02;
+}
+.hero-sub{ font-size:18px; color:var(--muted); margin-bottom:12px; max-width:720px; }
+
+/* features */
+.hero-features{ display:flex; gap:12px; margin-top:18px; }
+.feature{
+  display:flex; gap:12px; align-items:flex-start;
+  background: rgba(255,255,255,0.02); padding:10px; border-radius:10px; border:1px solid rgba(255,255,255,0.03);
+}
+.feature-icon{
+  width:48px; height:48px; border-radius:10px; display:grid; place-items:center; font-weight:900;
+  background: linear-gradient(90deg, var(--purple-600), var(--purple-500));
+  color:var(--white);
+}
+
+/* right: carousel */
+.hero-visual{
+  width:100%;
+  height:360px;
+  border-radius: var(--r-lg);
+  overflow:hidden;
+  position:relative;
+  background: linear-gradient(135deg, rgba(0,0,0,0.12), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,255,255,0.03);
+  box-shadow: 0 18px 60px rgba(0,0,0,0.5);
+}
+.carousel-slides{
+  display:flex;
+  height:100%;
+  width:100%;
+  transition: transform 640ms var(--ease);
+}
+.carousel-slide{
+  min-width:100%; display:grid; place-items:center; text-align:center; padding:18px; color:var(--white);
+}
+.carousel-slide .title{ font-weight:900; font-size:20px }
+.carousel-slide .desc{ margin-top:8px; color:rgba(255,255,255,0.92) }
+
+/* dots */
+.carousel-dots{
+  position:absolute; bottom:12px; left:50%; transform:translateX(-50%); display:flex; gap:8px; z-index:12;
+}
+.carousel-dots .dot{
+  width:10px; height:10px; border-radius:10px; background: rgba(255,255,255,0.12); cursor:pointer;
+}
+.carousel-dots .dot.active{ background: var(--purple-600); box-shadow: 0 8px 26px rgba(122,79,240,0.16); }
+
+/* -------------------------
+   Categories & chips
+   ------------------------- */
+.categories{ padding-top:24px; padding-bottom:24px; }
+.chips{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+.chip{
+  background: rgba(255,255,255,0.02); padding:8px 12px; border-radius:999px; border:1px solid rgba(255,255,255,0.03);
+  color:var(--gray-300); font-weight:800; cursor:pointer;
+}
+.chip.active{ background: linear-gradient(90deg, rgba(122,79,240,0.12), rgba(0,0,0,0.06)); color:var(--white); }
+
+/* -------------------------
+   Products grid
+   ------------------------- */
+.section{ padding:40px 0; }
+.section-title{ font-size:28px; font-weight:900; color:var(--white); margin-bottom:12px; }
+
+.products-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap:16px;
+  margin-top:12px;
+}
+.product{
+  position:relative;
+  background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(0,0,0,0.06));
+  border-radius:12px;
+  padding:12px;
+  border:1px solid rgba(255,255,255,0.03);
+  display:flex; flex-direction:column; gap:10px;
+  transition: transform 180ms var(--ease), box-shadow 180ms var(--ease);
+}
+.product:hover{ transform: translateY(-8px); box-shadow: 0 22px 60px rgba(0,0,0,0.55); }
+
+.product-thumb{
+  height:160px; border-radius:10px; overflow:hidden; display:grid; place-items:center;
+  background: linear-gradient(135deg, rgba(122,79,240,0.08), rgba(0,0,0,0.12));
+  color:var(--white); font-weight:900;
+}
+.product-title{ font-weight:900; font-size:15px; color:var(--white); }
+.product-desc{ color:var(--muted); font-size:13px; min-height:38px; }
+
+.product-price-row{ display:flex; justify-content:space-between; gap:12px; align-items:center; }
+.product-price{ color:var(--purple-500); font-weight:900; font-size:17px; }
+.product-old{ color: rgba(255,255,255,0.16); text-decoration:line-through; font-weight:700 }
+
+/* footer area inside product card */
+.product-footer{ margin-top:auto; display:flex; justify-content:space-between; align-items:center; gap:8px; }
+
+/* empty state */
+.empty-state{ padding:20px; border-radius:10px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.03); text-align:center }
+
+/* -------------------------
+   Deals, Services, Blog, Testimonials
+   ------------------------- */
+.deals-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap:12px; margin-top:12px; }
+.deal-card{ padding:14px; border-radius:12px; background: rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.03) }
+
+.services-grid{ display:grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap:12px; margin-top:12px; }
+.blog-grid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap:12px; margin-top:12px; }
+.testimonials-grid{ display:grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap:12px; margin-top:12px; }
+
+/* -------------------------
+   Contact section + form
+   ------------------------- */
+.contact-grid{ display:grid; grid-template-columns: 1fr 360px; gap:18px; align-items:start; margin-top:12px; }
+.contact-card{ padding:18px; border-radius:12px; background: rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.03) }
+.input, .textarea{
+  width:100%; padding:12px; border-radius:8px; border:1px solid rgba(255,255,255,0.04); background:transparent; color:var(--muted);
+}
+.input:focus, .textarea:focus{ outline:none; box-shadow: 0 10px 30px rgba(122,79,240,0.08); border-color: var(--purple-600); }
+
+/* map placeholder */
+.map-placeholder{
+  height:200px; border-radius:10px; background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(0,0,0,0.04)); display:grid; place-items:center; color:var(--muted); border:1px solid rgba(255,255,255,0.03);
+}
+
+/* subscribe */
+.subscribe input{ width:100%; padding:10px; border-radius:8px; border:1px solid rgba(255,255,255,0.04); background:transparent; color:var(--muted); }
+
+/* -------------------------
+   Footer
+   ------------------------- */
+.footer{
+  padding: var(--gap-lg) 0; margin-top:var(--gap-lg); border-top: 1px solid rgba(255,255,255,0.03);
+  background: linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.04));
+}
+.footer-grid{ display:grid; grid-template-columns: 1fr 220px 220px; gap:12px; align-items:start; }
+.footer .logo-mark{ width:64px; height:64px; border-radius:12px; display:grid; place-items:center; font-weight:900; background: linear-gradient(90deg, var(--purple-700), var(--purple-600)); }
+.footer a{ color:var(--muted) }
+
+/* -------------------------
+   Modal base
+   ------------------------- */
+.modal{
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.8));
+  z-index: 1400;
+  padding: 24px;
+}
+.modal[aria-hidden="true"]{ display:none; }
+.modal-card{
+  width: min(980px, 98%); max-width: 1200px; border-radius:12px; overflow: hidden; background:var(--white); color:var(--gray-900);
+  box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+  display:flex; gap:0;
+}
+.modal .modal-body{ padding:20px; }
+
+/* product quick modal */
+.modal-thumb{ min-width:420px; height:100%; background:#eee; background-size:cover; background-position:center; }
+
+/* -------------------------
+   ADMIN LOGIN MODAL (non-glitch)
+   ------------------------- */
+/* Visible when aria-hidden="false" or .open added */
+.modal.admin-login .admin-login-card{
+  width: min(680px, 96%); border-radius:12px; display:block;
+}
+/* keep the admin login modal centered and small */
+#adminLoginModal .modal-body{ 
+  max-width:640px; width:100%; padding:20px; 
+  background: linear-gradient(180deg, #fff, #fff); 
+  border-radius:8px; 
+}
+
+/* Fix for password field visibility */
+#adminLoginModal input[type="password"] {
+  color: #333 !important; /* Force dark text color for password field */
+  background-color: #f9f9f9 !important;
+}
+
+/* -------------------------
+   ADMIN DASHBOARD (slide-in panel)
+   - Hidden by default using .hidden class in HTML
+   - JS should remove .hidden and add .open to slide-in
+   ------------------------- */
+.admin-dashboard{
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: min(980px, 92%);
+  max-width: 980px;
+  background: linear-gradient(180deg, rgba(18,0,23,0.98), rgba(10,6,10,0.98));
+  color: var(--muted);
+  z-index: 1500;
+  transform: translateX(110%); /* off-screen */
+  transition: transform 420ms var(--ease), box-shadow 320ms var(--ease);
+  box-shadow: -12px 0 46px rgba(0,0,0,0.6);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* when the panel should appear, JS toggles .open */
+.admin-dashboard.open{
+  transform: translateX(0);
+}
+
+/* fallback: if HTML has .hidden we keep it removed from screen */
+.admin-dashboard:not(.open) {
+  display: none;
+}
+
+/* admin header */
+.admin-header{ display:flex; justify-content:space-between; align-items:center; padding:18px 20px; border-bottom:1px solid rgba(255,255,255,0.03); }
+.admin-brand{ display:flex; gap:12px; align-items:center; }
+.admin-title{ font-weight:900; color:var(--white) }
+.admin-actions{ display:flex; gap:8px; align-items:center; }
+
+/* admin body layout */
+.admin-body{ display:flex; flex:1 1 auto; gap:12px; padding:20px; }
+.admin-nav{ width:220px; border-right:1px solid rgba(255,255,255,0.03); padding-right:12px; }
+.admin-nav ul{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px; }
+.admin-tab{
+  padding:10px 12px; border-radius:8px; background:transparent; color:var(--muted);
+  border:1px solid transparent; text-align:left; cursor:pointer; font-weight:800;
+}
+.admin-tab.active{ background: linear-gradient(90deg, rgba(122,79,240,0.12), rgba(0,0,0,0.04)); color:var(--white); box-shadow:0 8px 30px rgba(0,0,0,0.35); }
+
+/* admin panels area */
+.admin-panels{ flex:1 1 auto; padding-left:12px; }
+.admin-panel{ display:none; }
+.admin-panel.active{ display:block; }
+
+/* admin controls, cards, inputs */
+.admin-input{ 
+  width:100%; padding:10px; border-radius:8px; 
+  border:1px solid rgba(255,255,255,0.04); 
+  background: rgba(255,255,255,0.05); 
+  color:var(--muted);
+}
+.admin-input:focus {
+  background: rgba(255,255,255,0.1);
+  color: var(--white);
+}
+.admin-card{ padding:12px; border-radius:10px; background: rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.03) }
+.list.admin-list{ display:flex; flex-direction:column; gap:8px; max-height:420px; overflow:auto; padding-right:6px; }
+
+/* uploader */
+.uploader{ display:flex; gap:12px; align-items:center; justify-content:space-between; padding:10px; border-radius:8px; border:1px dashed rgba(255,255,255,0.03); }
+
+/* small helpers in admin */
+.ctrl-row{ display:flex; gap:8px; margin-top:8px; align-items:center }
+
+/* -------------------------
+   Toast
+   ------------------------- */
+#toastRoot{ position: fixed; right:18px; bottom:18px; z-index: 1600; display:flex; flex-direction:column; gap:8px; }
+.toast{
+  background: linear-gradient(90deg, var(--purple-700), var(--purple-600)); color:var(--white); padding:10px 14px;
+  border-radius:8px; box-shadow: 0 12px 40px rgba(0,0,0,0.45); font-weight:800;
+}
+
+/* Mobile menu button */
+.mobile-menu-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 25px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.mobile-menu-btn span {
+  width: 30px;
+  height: 3px;
+  background: var(--white);
+  border-radius: 2px;
+  transition: all 0.3s linear;
+}
+
+/* -------------------------
+   Responsive
+   ------------------------- */
+@media (max-width: 1100px){
+  .hero-inner{ grid-template-columns:1fr; }
+  .hero-visual{ height:300px; }
+  .admin-nav{ display:none; } /* admin becomes stacked */
+  .admin-dashboard{ width:100vw; max-width:100vw; }
+  .contact-grid{ grid-template-columns: 1fr; }
+  .products-grid{ grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); }
+}
+
+@media (max-width: 680px){
+  .nav ul{ 
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--gray-800);
+    flex-direction: column;
+    padding: 20px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  .nav ul.show {
+    display: flex;
+  }
+  .mobile-menu-btn {
+    display: flex;
+  }
+  .logo-mark{ width:48px; height:48px; font-size:16px; }
+  .hero-title{ font-size:28px; }
+  .hero-sub{ font-size:15px; }
+  .hero-visual{ height:220px; }
+  .admin-dashboard{ padding:12px; }
+  .hero-features {
+    flex-direction: column;
+  }
+}
+
+/* -------------------------
+   Accessibility / focus
+   ------------------------- */
+button:focus, a:focus, input:focus, select:focus, textarea:focus{
+  outline: 2px solid rgba(122,79,240,0.18); outline-offset: 2px;
+  box-shadow: 0 8px 28px rgba(122,79,240,0.06);
+}
+
+/* ======================================================================
+   End of stylesheet
+   ====================================================================== */

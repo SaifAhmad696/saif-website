@@ -1,0 +1,748 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MSA Tech Store — Storefront & Admin</title>
+  <meta name="description" content="MSA Tech Store — Hardware, Parts, Repairs, Services. Admin dashboard built in for local editing." />
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="header-wrap" id="mainHeader" role="banner">
+    <div class="container header">
+      <a class="brand" href="#" id="brandLink">
+        <div class="logo-mark" id="logoMark" aria-hidden="true">MSA</div>
+        <div class="brand-text">
+          <div class="title" id="siteTitle">MSA Tech Store</div>
+          <div class="subtitle text-muted" id="siteTag">Hardware • Services • Support</div>
+        </div>
+      </a>
+
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav" id="mainNav" aria-label="Main Navigation">
+        <ul id="navMenu">
+          <li><a href="#home" data-scroll>Home</a></li>
+          <li><a href="#products" data-scroll>Products</a></li>
+          <li><a href="#laptops" data-scroll>Laptops</a></li>
+          <li><a href="#services" data-scroll>Services</a></li>
+          <li><a href="#deals" data-scroll>Deals</a></li>
+          <li><a href="#blog" data-scroll>Blog</a></li>
+          <li><a href="#faq" data-scroll>FAQ</a></li>
+          <li><a href="#contact" data-scroll>Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button class="btn btn-primary" id="catalogBtn" aria-controls="products">Catalog</button>
+        <button class="btn btn-ghost" id="adminOpenBtn" aria-haspopup="dialog" aria-controls="adminLoginModal">Admin</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="mainContent">
+    <section id="home" class="hero section" aria-label="Hero">
+      <div class="container hero-inner">
+        <div class="hero-left">
+          <h1 id="heroHeadline">Modern IT hardware — built for performance</h1>
+          <p id="heroSub">MSA brings reliable components, fast repairs and tailored IT services for gamers, creators and small businesses.</p>
+
+          <div class="hero-cta">
+            <button class="btn btn-primary" id="ctaShop">Shop Products</button>
+            <button class="btn btn-ghost" id="ctaServices">Explore Services</button>
+          </div>
+
+          <div class="hero-features" id="heroFeatures" aria-hidden="false">
+            <div class="feature" data-feature="shipping">
+              <div class="feature-icon">⚡</div>
+              <div class="feature-body">
+                <div class="feature-title">Fast Shipping</div>
+                <div class="feature-sub">Local stock and delivery across Syria</div>
+              </div>
+            </div>
+            <div class="feature" data-feature="repairs">
+              <div class="feature-icon">🔧</div>
+              <div class="feature-body">
+                <div class="feature-title">Repairs & Diagnostics</div>
+                <div class="feature-sub">Component-level repair & support</div>
+              </div>
+            </div>
+            <div class="feature" data-feature="support">
+              <div class="feature-icon">🔒</div>
+              <div class="feature-body">
+                <div class="feature-title">24/7 Support</div>
+                <div class="feature-sub">Round-the-clock help for urgent issues</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-right" id="heroVisualWrap">
+          <div id="heroCarousel" class="hero-visual" role="region" aria-roledescription="carousel" aria-label="Hero carousel">
+            <div class="carousel-slides" id="carouselSlides" aria-live="polite" aria-atomic="true">
+              <!-- Slides rendered by app.js -->
+            </div>
+
+            <div class="carousel-dots" id="carouselDots" role="tablist" aria-label="Slide navigation">
+              <!-- dots rendered by app.js -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="categories" class="section categories">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Shop by Category</h2>
+          <div class="category-controls">
+            <div id="categoryList" class="chips" role="list" aria-label="Category list">
+              <!-- categories injected by JS -->
+            </div>
+            <div class="category-actions">
+              <button class="btn btn-ghost" id="manageCategoriesBtn">Manage categories (admin)</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="products" class="section products" aria-label="Products">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Featured Products</h2>
+          <div class="products-controls">
+            <div class="filters-panel" role="toolbar" aria-label="Product filters">
+              <label for="filterCategory" class="text-sm">Category</label>
+              <select id="filterCategory" aria-controls="productsGrid">
+                <option value="all">All categories</option>
+                <!-- options injected by JS -->
+              </select>
+
+              <label for="searchProducts" class="text-sm">Search</label>
+              <input id="searchProducts" type="search" placeholder="Search products..." aria-label="Search products" />
+
+              <label for="sortProducts" class="text-sm">Sort</label>
+              <select id="sortProducts">
+                <option value="default">Default</option>
+                <option value="price-asc">Price low → high</option>
+                <option value="price-desc">Price high → low</option>
+              </select>
+            </div>
+
+            <div class="products-view-controls">
+              <button class="btn btn-ghost" id="showGridBtn" aria-pressed="true">Grid</button>
+              <button class="btn btn-ghost" id="showListBtn" aria-pressed="false">List</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="productsGrid" class="products-grid" aria-live="polite" aria-busy="false">
+          <!-- product cards will be inserted here by JS -->
+        </div>
+
+        <div id="productsEmpty" class="empty-state hidden" role="status" aria-live="polite">
+          <p>No products available — use Admin to add products and categories.</p>
+          <button class="btn btn-primary" id="openAdminFromNoProducts">Open Admin</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="laptops" class="section laptops">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Laptops for Sale</h2>
+          <p class="muted">Curated laptops on sale — updated regularly.</p>
+        </div>
+
+        <div id="laptopsGrid" class="products-grid">
+          <!-- laptops injected by JS -->
+        </div>
+
+        <div style="margin-top:14px">
+          <button class="btn btn-primary" id="viewAllLaptops">View All Laptops</button>
+          <button class="btn btn-ghost" id="manageLaptopsBtn">Manage Laptops (admin)</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="deals" class="section deals">
+      <div class="container">
+        <h2 class="section-title">Hot Deals</h2>
+
+        <div id="dealsGrid" class="deals-grid">
+          <!-- deals injected by JS -->
+        </div>
+        <div style="margin-top:14px">
+          <button class="btn btn-ghost" id="manageDealsBtn">Manage Deals (admin)</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section services">
+      <div class="container">
+        <h2 class="section-title">Services</h2>
+        <div id="servicesGrid" class="services-grid">
+          <!-- services injected by JS (editable) -->
+        </div>
+
+        <div style="margin-top:12px">
+          <button class="btn btn-ghost" id="manageServicesBtn">Manage Services (admin)</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section about">
+      <div class="container about-grid">
+        <div class="about-left">
+          <h2 class="section-title">About MSA</h2>
+          <p id="aboutText">MSA is a studio-run tech store focused on honest pricing and professional support. We offer repairs, builds, and support across Syria.</p>
+
+          <div class="about-stats" id="aboutStats">
+            <div class="stat">
+              <div class="stat-num" id="statCustomers">10k+</div>
+              <div class="stat-label">Customers</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num" id="statYears">5 years</div>
+              <div class="stat-label">In business</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num" id="statSupport">24/7</div>
+              <div class="stat-label">Support</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-right">
+          <div class="partners" id="partners">
+            <div class="partner">ASUS</div>
+            <div class="partner">Intel</div>
+            <div class="partner">NVIDIA</div>
+            <div class="partner">Corsair</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="blog" class="section blog">
+      <div class="container">
+        <h2 class="section-title">From the Blog</h2>
+        <div id="blogGrid" class="blog-grid">
+          <!-- blog posts injected by JS -->
+        </div>
+
+        <div style="margin-top:12px">
+          <button class="btn btn-ghost" id="manageBlogBtn">Manage Blog (admin)</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonials" class="section testimonials">
+      <div class="container">
+        <h2 class="section-title">What Clients Say</h2>
+        <div id="testimonialsGrid" class="testimonials-grid">
+          <!-- testimonials injected by JS -->
+        </div>
+        <div style="margin-top:12px">
+          <button class="btn btn-ghost" id="manageTestimonialsBtn">Manage Testimonials</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="section faq">
+      <div class="container">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div id="faqGrid" class="faq-grid">
+          <!-- FAQ items injected by JS -->
+        </div>
+        <div style="margin-top:12px">
+          <button class="btn btn-ghost" id="manageFaqBtn">Edit FAQ (admin)</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact-section">
+      <div class="container contact-grid">
+        <div class="contact-card">
+          <h2>Contact Us</h2>
+          <p class="muted">Send a message or ask for a quote. Messages are stored locally in the admin inbox (demo).</p>
+
+          <form id="contactForm" aria-label="Contact form">
+            <div class="form-row">
+              <input class="input" id="contactName" name="name" placeholder="Name" required />
+              <input class="input" id="contactEmail" name="email" placeholder="Email" type="email" required />
+            </div>
+            <div class="form-row">
+              <input class="input" id="contactPhone" name="phone" placeholder="Phone (optional)" />
+            </div>
+            <div class="form-row">
+              <textarea class="textarea" id="contactMessage" name="message" placeholder="Message" rows="6"></textarea>
+            </div>
+
+            <div class="form-row">
+              <button class="btn btn-primary" type="submit" id="contactSubmitBtn">Send Message</button>
+              <button class="btn btn-ghost" type="reset" id="contactResetBtn">Reset</button>
+            </div>
+          </form>
+        </div>
+
+        <aside class="contact-aside">
+          <div class="contact-info admin-editable" data-editable="contact">
+            <div><strong>Phone:</strong> <span id="infoPhone">0958096302</span></div>
+            <div><strong>Email:</strong> <span id="infoEmail">support@msashop.com</span></div>
+            <div><strong>Address:</strong> <span id="infoAddress">123 Tech Street</span></div>
+            <div><strong>Delivery:</strong> <span id="infoDelivery">We deliver across Syria</span></div>
+          </div>
+
+          <div class="map-placeholder" aria-hidden="true">
+            <div class="muted">Map placeholder — add embed in Admin</div>
+          </div>
+
+          <div class="subscribe" style="margin-top:14px">
+            <h4>Subscribe</h4>
+            <input id="subscribeEmail" placeholder="Email address" aria-label="Subscribe email" />
+            <div style="margin-top:8px"><button class="btn btn-primary" id="subscribeBtn">Subscribe</button></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="messages" class="section messages hidden">
+      <div class="container">
+        <h2 class="section-title">Messages (Admin Inbox)</h2>
+        <div id="messagesList" class="list">
+          <!-- messages injected by app.js and visible from Admin -->
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer" role="contentinfo">
+      <div class="container footer-grid">
+        <div class="footer-col">
+          <div class="logo-mark">MSA</div>
+          <p class="muted">MSA Tech Store — your trusted local IT partner. Studio-run, customer-first.</p>
+          <div class="muted text-sm">Trademark © <strong>MSA Tech Store</strong></div>
+          <div class="muted text-sm">Built by Saif</div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#home" data-scroll>Home</a></li>
+            <li><a href="#products" data-scroll>Products</a></li>
+            <li><a href="#services" data-scroll>Services</a></li>
+            <li><a href="#contact" data-scroll>Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <p>Email: <span id="footerEmail">support@msashop.com</span></p>
+          <p>Phone: <span id="footerPhone">0958096302</span></p>
+          <p>Address: <span id="footerAddress">123 Tech Street</span></p>
+        </div>
+      </div>
+
+      <div class="container footer-bottom">
+        <small class="muted">© 2025 MSA Tech Store — All rights reserved.</small>
+      </div>
+    </footer>
+  </main>
+
+  <div id="adminLoginModal" class="modal admin-login" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-card admin-login-card" role="document">
+      <div class="modal-body">
+        <button class="btn btn-ghost" id="adminLoginClose" aria-label="Close admin login">Close</button>
+        <h3>Admin Login</h3>
+        <p class="muted">Enter the admin password to access the dashboard. Your password is stored locally (demo).</p>
+
+        <form id="adminLoginForm" aria-label="Admin login form">
+          <div class="form-row">
+            <label for="adminPassword">Password</label>
+            <input id="adminPassword" type="password" class="input" placeholder="Enter admin password" required />
+          </div>
+
+          <div class="form-row">
+            <label for="rememberAdmin">
+              <input id="rememberAdmin" type="checkbox" /> Keep me logged in (stores a token in local storage)
+            </label>
+          </div>
+
+          <div class="form-row">
+            <button class="btn btn-primary" type="submit" id="adminLoginBtn">Unlock Admin</button>
+            <button class="btn btn-ghost" id="adminRecoverBtn" type="button">Reset password (demo)</button>
+          </div>
+
+          <div class="muted text-sm">If you don't have a password yet, Admin defaults to a demo password. You can change it inside the Admin settings.</div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <aside id="adminDashboard" class="admin-dashboard hidden" role="region" aria-label="Admin dashboard">
+    <div class="admin-header">
+      <div class="admin-brand">
+        <div class="logo-mark">MSA</div>
+        <div>
+          <div class="admin-title">Admin Dashboard</div>
+          <div class="muted">Control your shop content</div>
+        </div>
+      </div>
+      <div class="admin-actions">
+        <button class="btn btn-ghost" id="adminCloseBtn" aria-label="Close admin dashboard">Close</button>
+        <button class="btn btn-primary" id="adminLogoutBtn">Log out</button>
+      </div>
+    </div>
+
+    <div class="admin-body">
+      <nav class="admin-nav" role="navigation" aria-label="Admin sections">
+        <ul>
+          <li><button class="admin-tab active" data-tab="tab-shopinfo">Shop Info</button></li>
+          <li><button class="admin-tab" data-tab="tab-categories">Categories</button></li>
+          <li><button class="admin-tab" data-tab="tab-products">Products</button></li>
+          <li><button class="admin-tab" data-tab="tab-slider">Slider</button></li>
+          <li><button class="admin-tab" data-tab="tab-deals">Deals</button></li>
+          <li><button class="admin-tab" data-tab="tab-services">Services</button></li>
+          <li><button class="admin-tab" data-tab="tab-faq">FAQ</button></li>
+          <li><button class="admin-tab" data-tab="tab-blog">Blog</button></li>
+          <li><button class="admin-tab" data-tab="tab-messages">Messages</button></li>
+          <li><button class="admin-tab" data-tab="tab-settings">Settings</button></li>
+        </ul>
+      </nav>
+
+      <div class="admin-panels">
+
+        <!-- SHOP INFO PANEL -->
+        <section id="tab-shopinfo" class="admin-panel active" role="region" aria-label="Shop information">
+          <h3>Shop Information</h3>
+          <div class="admin-grid">
+            <div class="admin-col">
+              <label>Store title</label>
+              <input id="adminShopTitleInput" class="admin-input" />
+              <label>Store subtitle / tagline</label>
+              <input id="adminShopSubtitleInput" class="admin-input" />
+              <label>Phone</label>
+              <input id="adminPhoneInput" class="admin-input" />
+              <label>Email</label>
+              <input id="adminEmailInput" class="admin-input" />
+              <label>Address</label>
+              <input id="adminAddressInput" class="admin-input" />
+              <label>Delivery info</label>
+              <input id="adminDeliveryInput" class="admin-input" placeholder="e.g. We deliver across Syria" />
+              <div style="margin-top:8px" class="ctrl-row">
+                <button class="btn btn-primary" id="saveShopInfo">Save shop info</button>
+                <button class="btn btn-ghost" id="resetShopInfo">Reset</button>
+              </div>
+            </div>
+
+            <div class="admin-col">
+              <h4>Footer & Trademark</h4>
+              <label>Footer text</label>
+              <textarea id="adminFooterText" class="admin-input" rows="3"></textarea>
+
+              <h4 style="margin-top:12px">Branding</h4>
+              <div class="uploader">
+                <label>Upload logo</label>
+                <input id="adminLogoUpload" type="file" accept="image/*" />
+              </div>
+
+              <h4 style="margin-top:12px">Preview</h4>
+              <div id="adminSitePreview" class="slider-preview">Live preview will show here</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- CATEGORIES PANEL -->
+        <section id="tab-categories" class="admin-panel" role="region" aria-label="Categories">
+          <h3>Categories</h3>
+          <p class="muted">Add, edit, delete and reorder categories used by the store.</p>
+
+          <div class="admin-grid">
+            <div class="admin-col">
+              <form id="categoryForm">
+                <label>New category name</label>
+                <input id="newCategoryName" class="admin-input" placeholder="e.g. laptops" />
+                <div style="margin-top:8px; display:flex; gap:8px">
+                  <button class="btn btn-primary" id="addCategoryBtn" type="button">Add Category</button>
+                  <button class="btn btn-ghost" id="clearCategoryBtn" type="button">Clear</button>
+                </div>
+              </form>
+
+              <h4 style="margin-top:12px">Category list</h4>
+              <div id="categoryAdminList" class="list">
+                <!-- categories with edit and delete controls injected by JS -->
+              </div>
+            </div>
+
+            <div class="admin-col">
+              <h4>Category settings</h4>
+              <p class="muted">Select a category to edit name, slug, visibility, or delete. You can also reorder using the arrows.</p>
+              <div id="categoryEditor" class="admin-card">
+                <label>Category name</label>
+                <input id="categoryEditName" class="admin-input" />
+                <label>Slug</label>
+                <input id="categoryEditSlug" class="admin-input" />
+                <label>Visible</label>
+                <select id="categoryEditVisible" class="admin-input"><option value="true">Visible</option><option value="false">Hidden</option></select>
+                <div style="margin-top:8px">
+                  <button class="btn btn-primary" id="saveCategoryBtn">Save</button>
+                  <button class="btn btn-ghost" id="deleteCategoryBtn">Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- PRODUCTS PANEL -->
+        <section id="tab-products" class="admin-panel" role="region" aria-label="Products">
+          <h3>Products</h3>
+          <p class="muted">Create and manage products. Use the product image uploader to show images in the storefront.</p>
+
+          <div class="admin-grid">
+            <div class="admin-col">
+              <form id="adminProductForm" class="product-form">
+                <label>Title</label>
+                <input id="adminProductTitle" class="admin-input" required />
+
+                <label>Category</label>
+                <select id="adminProductCategory" class="admin-input">
+                  <!-- categories injected by JS -->
+                </select>
+
+                <label>Price (e.g. USD 99)</label>
+                <input id="adminProductPrice" class="admin-input" />
+
+                <label>Old price (optional)</label>
+                <input id="adminProductOldPrice" class="admin-input" />
+
+                <label>Description</label>
+                <textarea id="adminProductDesc" class="admin-input" rows="4"></textarea>
+
+                <label>Image</label>
+                <input id="adminProductImage" type="file" accept="image/*" />
+
+                <div style="margin-top:8px" class="ctrl-row">
+                  <button class="btn btn-primary" id="saveProductAdminBtn">Save product</button>
+                  <button class="btn btn-ghost" id="newProductAdminBtn" type="button">New</button>
+                </div>
+              </form>
+            </div>
+
+            <div class="admin-col">
+              <h4>Products List</h4>
+              <div id="adminProductsTable" class="list admin-list" aria-live="polite">
+                <!-- product rows added by JS -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SLIDER PANEL -->
+        <section id="tab-slider" class="admin-panel" role="region" aria-label="Slider">
+          <h3>Hero Slider</h3>
+          <p class="muted">Add slides, upload images, and reorder the hero carousel.</p>
+
+          <div class="admin-grid">
+            <div class="admin-col">
+              <label>Slide title</label>
+              <input id="slideTitleInput" class="admin-input" />
+              <label>Slide subtitle</label>
+              <input id="slideSubtitleInput" class="admin-input" />
+              <label>Image</label>
+              <input id="slideImageInput" type="file" accept="image/*" />
+              <div style="margin-top:8px" class="ctrl-row">
+                <button class="btn btn-primary" id="addSlideAdminBtn">Add Slide</button>
+                <button class="btn btn-ghost" id="clearSlidesAdminBtn">Clear Slides</button>
+              </div>
+            </div>
+
+            <div class="admin-col">
+              <h4>Slide list & reorder</h4>
+              <div id="slidesAdminList" class="list admin-list">
+                <!-- slides injected by JS -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- DEALS PANEL -->
+        <section id="tab-deals" class="admin-panel" role="region" aria-label="Deals">
+          <h3>Hot Deals</h3>
+          <p class="muted">Add promotional bundles and limited-time offers.</p>
+
+          <div class="admin-grid">
+            <div class="admin-col">
+              <label>Deal title</label>
+              <input id="dealTitle" class="admin-input" />
+              <label>Description</label>
+              <input id="dealDesc" class="admin-input" />
+              <label>Price</label>
+              <input id="dealPrice" class="admin-input" />
+              <div style="margin-top:8px" class="ctrl-row">
+                <button class="btn btn-primary" id="addDealBtn">Add deal</button>
+              </div>
+            </div>
+
+            <div class="admin-col">
+              <h4>Active deals</h4>
+              <div id="dealsAdminList" class="list admin-list"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SERVICES PANEL -->
+        <section id="tab-services" class="admin-panel" role="region" aria-label="Services">
+          <h3>Services</h3>
+          <p class="muted">Add or edit services you offer (repairs, on-site support, warranties, etc.).</p>
+
+          <div class="admin-grid">
+            <div class="admin-col">
+              <label>Service name</label>
+              <input id="serviceName" class="admin-input" />
+              <label>Short description</label>
+              <input id="serviceDesc" class="admin-input" />
+              <div style="margin-top:8px">
+                <button class="btn btn-primary" id="addServiceBtn">Add Service</button>
+              </div>
+            </div>
+
+            <div class="admin-col">
+              <h4>Services list</h4>
+              <div id="servicesAdminList" class="list admin-list"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- FAQ PANEL -->
+        <section id="tab-faq" class="admin-panel" role="region" aria-label="FAQ">
+          <h3>Frequently Asked Questions</h3>
+          <p class="muted">Add, edit or remove FAQ entries. These appear on the public FAQ section.</p>
+
+          <div class="admin-grid">
+            <div class="admin-col">
+              <label>Question</label>
+              <input id="faqQuestion" class="admin-input" />
+              <label>Answer</label>
+              <textarea id="faqAnswer" class="admin-input" rows="4"></textarea>
+              <div style="margin-top:8px">
+                <button class="btn btn-primary" id="addFaqBtn">Add FAQ</button>
+              </div>
+            </div>
+
+            <div class="admin-col">
+              <h4>FAQ items</h4>
+              <div id="faqAdminList" class="list admin-list"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- BLOG PANEL -->
+        <section id="tab-blog" class="admin-panel" role="region" aria-label="Blog">
+          <h3>Blog</h3>
+          <p class="muted">Create short posts and link to long-form articles if needed.</p>
+
+          <div class="admin-grid">
+            <div class="admin-col">
+              <label>Title</label>
+              <input id="blogTitle" class="admin-input" />
+              <label>Excerpt</label>
+              <textarea id="blogExcerpt" class="admin-input" rows="3"></textarea>
+              <label>URL (optional)</label>
+              <input id="blogUrl" class="admin-input" />
+              <div style="margin-top:8px">
+                <button class="btn btn-primary" id="addBlogBtn">Add post</button>
+              </div>
+            </div>
+
+            <div class="admin-col">
+              <h4>Posts</h4>
+              <div id="blogAdminList" class="list admin-list"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- MESSAGES PANEL -->
+        <section id="tab-messages" class="admin-panel" role="region" aria-label="Messages">
+          <h3>Contact Messages</h3>
+          <p class="muted">Messages sent by customers via the contact form (stored locally in this demo).</p>
+          <div class="admin-card">
+            <div id="adminMessagesList" class="list admin-list">
+              <!-- messages appended by JS -->
+            </div>
+
+            <div style="margin-top:8px" class="ctrl-row">
+              <button class="btn btn-ghost" id="clearMessagesBtn">Clear messages</button>
+              <button class="btn" id="exportMessagesBtn">Export messages (JSON)</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- SETTINGS PANEL -->
+        <section id="tab-settings" class="admin-panel" role="region" aria-label="Settings">
+          <h3>Settings</h3>
+          <p class="muted">Manage admin password, backups and local preferences.</p>
+
+          <div class="admin-grid">
+            <div class="admin-col">
+              <label>Change admin password</label>
+              <input id="changeAdminPassword" type="password" class="admin-input" placeholder="New password" />
+              <div style="margin-top:8px" class="ctrl-row">
+                <button class="btn btn-primary" id="saveAdminPasswordBtn">Save password</button>
+                <button class="btn btn-ghost" id="resetAdminPasswordBtn">Reset to demo</button>
+              </div>
+
+              <h4 style="margin-top:12px">Backup</h4>
+              <div class="ctrl-row">
+                <button class="btn" id="exportStoreBtn">Export store JSON</button>
+                <input id="importStoreFile" type="file" accept="application/json" />
+              </div>
+
+              <h4 style="margin-top:12px">Preview & Debug</h4>
+              <div class="ctrl-row">
+                <button class="btn btn-ghost" id="previewStoreBtn">Open live preview</button>
+                <button class="btn btn-ghost" id="debugDumpBtn">Console dump (debug)</button>
+              </div>
+            </div>
+
+            <div class="admin-col">
+              <h4>Admin preferences</h4>
+              <label>Auto-save changes
+                <select id="prefAutoSave" class="admin-input"><option value="true">On</option><option value="false">Off</option></select>
+              </label>
+
+              <h4 style="margin-top:12px">Danger zone</h4>
+              <button class="btn btn-ghost" id="wipeStoreBtn">Wipe all local store data</button>
+            </div>
+          </div>
+        </section>
+
+      </div><!-- /.admin-panels -->
+    </div><!-- /.admin-body -->
+  </aside><!-- /.admin-dashboard -->
+
+  <div id="productQuickModal" class="modal product-modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div id="productModalImage" class="modal-thumb"></div>
+      <div class="modal-body">
+        <button class="btn btn-ghost" id="productModalClose" aria-label="Close product modal">Close</button>
+        <h3 id="productModalTitle">Product name</h3>
+        <div id="productModalDesc" class="muted">Product short description / specs</div>
+        <div id="productModalPrice" class="product-price">USD 0</div>
+
+        <div style="margin-top:12px" class="ctrl-row">
+          <label>Qty<input id="productModalQty" type="number" min="1" value="1" style="width:80px" /></label>
+          <button class="btn btn-primary" id="productModalAdd">Add to cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toastRoot" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
